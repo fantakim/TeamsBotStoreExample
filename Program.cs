@@ -3,6 +3,7 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.TeamsFx.Conversation;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,7 @@ builder.Services.AddSingleton(sp =>
         Notification = new NotificationOptions
         {
             BotAppId = builder.Configuration["MicrosoftAppId"],
+            Store = new BlobStore(config.StoreConnectionString, config.StoreContainerName)
         },
     };
 
